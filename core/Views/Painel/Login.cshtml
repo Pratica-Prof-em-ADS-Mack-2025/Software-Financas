@@ -26,7 +26,6 @@
 
 <body class="account-pages">
 
-    <!-- Begin page -->
     <div class="accountbg" style="background: url('../assets/images/bg.jpg');background-size: contain;background-position: center;"></div>
 
     <div class="wrapper-page account-page-full">
@@ -75,10 +74,10 @@
                                                 </button>
                                             </div>
                                         </div>
-                                        <!-- Alerta de sucesso -->
+                                       
                                         <div v-if="successMessage" class="alert alert-success mt-2">{{ successMessage }}</div>
 
-                                        <!-- Alerta de erro -->
+                                        
                                         <div v-if="errorMessage" class="alert alert-danger mt-2">{{ errorMessage }}</div>
                                     </form>
 
@@ -167,8 +166,7 @@
             </div>
         </div>
     </div>
-    <!-- JAVASCRIPT -->
-    <!-- JAVASCRIPT -->
+   
     <script src="~/assets/libs/jquery/jquery.min.js"></script>
     <script src="~/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/assets/libs/metismenu/metisMenu.min.js"></script>
@@ -217,7 +215,6 @@
                     this.errorMessage = '';
                     this.successMessage = '';
 
-                    // Validações
                     if (!this.registerData.nome || !this.registerData.email || !this.registerData.telefone || !this.registerData.senha || !this.registerData.confirmarSenha) {
                         this.errorMessage = 'Preencha todos os campos.';
                         return;

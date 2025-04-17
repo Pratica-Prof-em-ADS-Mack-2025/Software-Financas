@@ -67,7 +67,7 @@ namespace core.Infra.Repository
         {
             using (var connection = _repositoryBase.connMysql())
             {
-                await connection.OpenAsync(); // <-- Esta linha resolve o problema!
+                await connection.OpenAsync();
 
                 using (var transaction = connection.BeginTransaction())
                 {

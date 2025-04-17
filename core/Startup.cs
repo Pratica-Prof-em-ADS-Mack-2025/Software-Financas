@@ -53,7 +53,7 @@ namespace core
                 {
                     options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
                     options.SlidingExpiration = true;
-                    options.LoginPath = "/Painel/Login";  // Correct path to your login page
+                    options.LoginPath = "/Painel/Login";  
                     options.AccessDeniedPath = "/Forbidden/";
                 });
 
@@ -118,7 +118,6 @@ namespace core
             app.UseCors("AllowOrigin");
             app.UseAuthentication();
 
-            //Custom middleware to check session
             app.Use(async (context, next) =>
             {
                 var userEmail = context.Session.GetString("UserEmail");

@@ -14,7 +14,6 @@ namespace core.Infra.Repository
             _repositoryBase = repositoryBase;
         }
 
-        // Adicionar novo usuario
         public void CadastrarUsuario(Usuario usuario)
         {
             using (var connection = _repositoryBase.connMysql())
@@ -33,7 +32,6 @@ namespace core.Infra.Repository
             }
         }
 
-        // Verificar se o email já existe
         public bool ExisteEmail(string email)
         {
             using (var connection = _repositoryBase.connMysql())
@@ -43,7 +41,6 @@ namespace core.Infra.Repository
             }
         }
 
-        // Encontrar usuario pelo email
         public Usuario GetUsuarioPorEmail(string email)
         {
             using (var connection = _repositoryBase.connMysql())
@@ -53,7 +50,6 @@ namespace core.Infra.Repository
             }
         }
 
-        // Encontrar usuario pelo ID
         public Usuario GetUsuarioPorId(int id)
         {
             using (var connection = _repositoryBase.connMysql())
@@ -63,7 +59,6 @@ namespace core.Infra.Repository
             }
         }
 
-        // Atualizar dados do usuario
         public void Update(Usuario usuario)
         {
             using (var connection = _repositoryBase.connMysql())

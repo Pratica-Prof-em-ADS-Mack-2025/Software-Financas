@@ -21,7 +21,6 @@ namespace core.Infra.Repository
             {
                 if (parametro.Id.HasValue && parametro.Id.Value > 0)
                 {
-                    // Atualiza o parâmetro existente
                     var sqlUpdate = "UPDATE parametro SET tipo = @Categoria, sub_tipo = @Subcategoria WHERE id = @Id AND IdUsuario = @IdUsuario";
                     connection.Execute(sqlUpdate, new
                     {
@@ -33,7 +32,6 @@ namespace core.Infra.Repository
                 }
                 else
                 {
-                    // Insere um novo parâmetro
                     var sqlInsert = "INSERT INTO parametro (IdUsuario, tipo, sub_tipo) VALUES (@IdUsuario, @Categoria, @Subcategoria)";
                     connection.Execute(sqlInsert, new
                     {

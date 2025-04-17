@@ -16,8 +16,6 @@ namespace core.Service
         {
             _usuarioRepository = usuarioRepository;
         }
-
-        // Obter usuario por ID
         public Usuario GetUsuarioPorId(int id)
         {
             return _usuarioRepository.GetUsuarioPorId(id);
@@ -45,7 +43,6 @@ namespace core.Service
             return new ServiceResult { Success = true };
         }
 
-        // Atualizar usuário existente
         public ServiceResult UpdateUsuario (int id, Usuario usuarioDto)
         {
             var usuario = _usuarioRepository.GetUsuarioPorId(id);
@@ -54,11 +51,9 @@ namespace core.Service
                 return new ServiceResult { Success = false, Message = "Usuário não encontrado." };
             }
 
-            // Atualiza os dados do usuário
             usuario.Nome = usuarioDto.Nome;
             usuario.Email = usuarioDto.Email;
 
-            // Se a senha for atualizada, faça o hash
             if (!string.IsNullOrEmpty(usuarioDto.Senha))
             {
                 usuario.Senha = HashPassword(usuarioDto.Senha);
@@ -69,7 +64,6 @@ namespace core.Service
             return new ServiceResult { Success = true, Message = "Usuário atualizado com sucesso." };
         }
 
-        // Hash da senha
         private string HashPassword(string password)
         {
             using (var sha256 = SHA256.Create())
@@ -79,7 +73,6 @@ namespace core.Service
             }
         }
 
-        // Autenticar usuário
         public ServiceResult Authenticate(LoginDto loginDto)
         {
             var usuario = _usuarioRepository.GetUsuarioPorEmail(loginDto.Email);
@@ -91,7 +84,6 @@ namespace core.Service
             return new ServiceResult { Success = true, Message = "Login bem-sucedido." };
         }
 
-        // Verificar senha
         private bool VerifyPassword(string inputPassword, string storedHash)
         {
             using (var sha256 = SHA256.Create())
@@ -102,14 +94,12 @@ namespace core.Service
             }
         }       
 
-        // Obter usuário pelo email
         public Usuario GetUsuarioPorEmail(string email)
         {
             return _usuarioRepository.GetUsuarioPorEmail(email);
         }
     }
 
-    // Classe para resultado dos serviços
     public class ServiceResult
     {
         public bool Success { get; set; }
