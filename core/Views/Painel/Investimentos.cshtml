@@ -1,0 +1,138 @@
+﻿<style>
+    *::-webkit-scrollbar {
+        height: 10px;
+        width: 10px;
+    }
+
+    *::-webkit-scrollbar-track {
+        border-radius: 5px;
+        background-color: #F5F5F5;
+    }
+
+        *::-webkit-scrollbar-track:hover {
+            background-color: #E8E8E8;
+        }
+
+        *::-webkit-scrollbar-track:active {
+            background-color: #E8E8E8;
+        }
+
+    *::-webkit-scrollbar-thumb {
+        border-radius: 5px;
+        background-color: #C1C3C0;
+    }
+
+        *::-webkit-scrollbar-thumb:hover {
+            background-color: #B0B2AF;
+        }
+
+        *::-webkit-scrollbar-thumb:active {
+            background-color: #C1C3C0;
+        }
+</style>
+<div id="vue-chat-app" class="row py-3 h-100">
+    <div class="container-fluid py-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex flex-column gap-1 justify-content-between mb-3">
+                    <div class="d-flex justify-content-between gap-1">
+                        <h4 class="card-title">Investimentos:</h4>
+                        <button class="btn btn-primary" @@click="buscarConversas"><i class="fas fa-search"></i> Buscar</button>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label>Data Inicial:</label><br />
+                            <input v-model="dataInicial" class="form-control mb-2" type="date" />
+                        </div>
+                        <div class="col-md-2">
+                            <label>Data Final:</label><br />
+                            <input v-model="dataFinal" class="form-control mb-2" type="date" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-responsive rounded border mt-4">
+                    <table class="table-striped mb-0 table">
+                        <thead>
+                            <tr>
+                                <th>Investimentos</th>
+                                <th>Valor Investido</th>
+                                <th>Objetivo R$</th>
+                                <th>% Valor Investido</th>
+                                <th>Valor a Investir</th>
+                                <th>Investimento Excedente</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Renda Fixa</td>
+                                <td>R$2.000</td>
+                                <td>R$4.000</td>
+                                <td>50%</td>
+                                <td>R$2.000</td>
+                                <td>R$0.00</td>
+                            </tr>
+                            <tr>
+                                <td>Ações</td>
+                                <td>R$700</td>
+                                <td>R$1.000</td>
+                                <td>70%</td>
+                                <td>R$300</td>
+                                <td>R$0.00</td>
+                            </tr>
+                            <tr>
+                                <td>Fundos Imobiliários</td>
+                                <td>R$1.500</td>
+                                <td>R$2.500</td>
+                                <td>60%</td>
+                                <td>R$1.000</td>
+                                <td>R$0.00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="investimentosPieChart"></div>
+
+                <script>
+                    const options = {
+                      chart: {
+                        type: 'pie',
+                        height: 350
+                      },
+                      labels: ['Renda Fixa', 'Ações', 'Fundos Imobiliários'],
+                      series: [2000, 700, 1500],
+                      colors: ['#20c997', '#007bff', '#6610f2'],
+                      legend: {
+                        position: 'bottom',
+                        fontSize: '14px'
+                      },
+                      dataLabels: {
+                        formatter: function (val, opts) {
+                          const total = opts.w.globals.seriesTotals.reduce((a, b) => a + b, 0);
+                          const value = opts.w.globals.series[opts.seriesIndex];
+                          const percent = ((value / total) * 100).toFixed(1);
+                          return `R$ ${value.toLocaleString('pt-BR')} (${percent}%)`;
+                        },
+                        style: {
+                          fontSize: '14px'
+                        }
+                      },
+                      tooltip: {
+                        y: {
+                          formatter: (val) => 'R$ ' + val.toLocaleString('pt-BR')
+                        }
+                      }
+                    };
+
+                    const chart = new ApexCharts(document.querySelector("#investimentosPieChart"), options);
+                    chart.render();
+                </script>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+

@@ -1,0 +1,67 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = core
+build_property.RootNamespace = core
+build_property.ProjectDir = C:\ProjetosAutoDeploy\chat-bot\Central\core\core\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = true
+build_property.MSBuildProjectDirectory = C:\ProjetosAutoDeploy\chat-bot\Central\core\core
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/ProjetosAutoDeploy/chat-bot/Central/core/core/Views/Painel/AreaGestor.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFpbmVsXEFyZWFHZXN0b3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/ProjetosAutoDeploy/chat-bot/Central/core/core/Views/Painel/Central.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFpbmVsXENlbnRyYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/ProjetosAutoDeploy/chat-bot/Central/core/core/Views/Painel/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFpbmVsXExvZ2luLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/ProjetosAutoDeploy/chat-bot/Central/core/core/Views/Painel/Mensagens.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFpbmVsXE1lbnNhZ2Vucy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/ProjetosAutoDeploy/chat-bot/Central/core/core/Views/Painel/Proibido.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFpbmVsXFByb2liaWRvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/ProjetosAutoDeploy/chat-bot/Central/core/core/Views/Painel/RedefinirSenha.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFpbmVsXFJlZGVmaW5pclNlbmhhLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/ProjetosAutoDeploy/chat-bot/Central/core/core/Views/Painel/Roteiros.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFpbmVsXFJvdGVpcm9zLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/ProjetosAutoDeploy/chat-bot/Central/core/core/Views/Painel/Usuarios.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFpbmVsXFVzdWFyaW9zLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/ProjetosAutoDeploy/chat-bot/Central/core/core/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/ProjetosAutoDeploy/chat-bot/Central/core/core/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 

@@ -1,0 +1,261 @@
+﻿<style>
+    div#mensagensTable_filter label {
+        display: block;
+    }
+
+    div#mensagensTable_length label {
+        display: grid;
+    }
+
+    input.form-control.form-control-sm {
+        width: 100% !important;
+        display: block;
+    }
+
+    table#mensagensTable {
+        margin: 30px auto;
+    }
+
+    select.custom-select.custom-select-sm.form-control.form-control-sm {
+        grid-row: 2;
+        max-width: 200px;
+    }
+
+    @@media(max-width:900px) {
+        .td_area {
+            overflow-x: auto !important;
+        }
+    }
+</style>
+
+<div id="mensagens-vue">
+    <div class="container-fluid py-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between mb-3">
+                    <h4 class="card-title">Lançamentos</h4>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalOrcamentoRenda"><i class="fas fa-plus"></i> Adicionar Movimentação</button>
+                </div>
+
+                <div class="table-responsive rounded border">
+                    <table class="table-striped mb-0 table">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Categoria</th>
+                                <th>Tipo</th>
+                                <th>Valor</th>
+                                <th>Descrição</th>
+                                <th>Data Pagamento</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>08/04/2025</td>
+                                <td>Investimento</td>
+                                <td>Rend Fixa</td>
+                                <td>R$ 500</td>
+                                <td>Porquinho Inter</td>
+                                <td>08/04/2025</td>
+                               
+                                <td class="text-nowrap text-end">
+                                    <button type="button" class="btn btn-warning text-white" data-toggle="tooltip" data-bs-custom-class="warning" data-placement="top" title="Editar" @@click="toggleEditMode(index)" data-bs-toggle="modal" data-bs-target="#modalOrcamentoRenda">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-danger" data-toggle="tooltip" data-bs-custom-class="danger" data-placement="top" title="Excluir" @@click="excluirMensagem(mensagem.id)">
+                                        <i class="fas fa-times-circle"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>08/04/2025</td>
+                                <td>Gasto</td>
+                                <td>Aluguel</td>
+                                <td>R$ 1.500</td>
+                                <td>Pagamento Mensal do Aluguel</td>
+                                <td>08/04/2025</td>
+
+                                <td class="text-nowrap text-end">
+                                    <button type="button" class="btn btn-warning text-white" data-toggle="tooltip" data-bs-custom-class="warning" data-placement="top" title="Editar" @@click="toggleEditMode(index)" data-bs-toggle="modal" data-bs-target="#modalOrcamentoRenda">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-danger" data-toggle="tooltip" data-bs-custom-class="danger" data-placement="top" title="Excluir" @@click="excluirMensagem(mensagem.id)">
+                                        <i class="fas fa-times-circle"></i>
+                                    </button>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>08/04/2025</td>
+                                <td>Renda</td>
+                                <td>Dividendo</td>
+                                <td>R$ 1.500</td>
+                                <td>Dividendo Petrobrás</td>
+                                <td>08/04/2025</td>
+
+                                <td class="text-nowrap text-end">
+                                    <button type="button" class="btn btn-warning text-white" data-toggle="tooltip" data-bs-custom-class="warning" data-placement="top" title="Editar" @@click="toggleEditMode(index)" data-bs-toggle="modal" data-bs-target="#modalOrcamentoRenda">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-danger" data-toggle="tooltip" data-bs-custom-class="danger" data-placement="top" title="Excluir" @@click="excluirMensagem(mensagem.id)">
+                                        <i class="fas fa-times-circle"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" tabindex="-1" id="modalOrcamentoRenda">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">{{ isEditMode ? 'Editar Movimentação' : 'Adicionar Movimentação' }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row g-3 align-items-end">
+                            <div class="col-md-2">
+                                <label for="data" class="form-label">Data</label>
+                                <input type="date" class="form-control" id="data" name="data" value="2025-04-08">
+                            </div>
+
+                            <div class="col-md-2">
+                                <label for="categoria" class="form-label">Categoria</label>
+                                <select class="form-select" id="categoria" name="categoria">
+                                    <option value="Investimento">Investimento</option>
+                                    <option value="Gasto">Gasto</option>
+                                    <option value="Renda">Renda</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-2">
+                                <label for="lancamento" class="form-label">Lançamento</label>
+                                <select class="form-select" id="lancamento" name="lancamento">
+                                    <option value="Rend Fixa">Rend Fixa</option>
+                                    <option value="Aluguel">Aluguel</option>
+                                    <option value="Dividendo">Dividendo</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-2">
+                                <label for="valor" class="form-label">Valor</label>
+                                <input type="text" class="form-control" id="valor" name="valor" placeholder="R$ 0,00" value="R$ 500">
+                            </div>
+
+                            <div class="col-md-2">
+                                <label for="descricao" class="form-label">Descrição</label>
+                                <input type="text" class="form-control" id="descricao" name="descricao" placeholder="Descrição" value="Porquinho Inter">
+                            </div>
+
+                            <div class="col-md-2">
+                                <label for="data_pagamento" class="form-label">Data Pagamento</label>
+                                <input type="date" class="form-control" id="data_pagamento" name="data_pagamento" value="2025-04-08">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="submit" form="form_mensagem" class="btn btn-primary">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    new Vue({
+        el: '#mensagens-vue',
+        data: {
+            mensagens: [],
+            currentMensagem: { titulo: '', mensagem: '' },
+            isEditMode: false,
+            editIndex: -1
+        },
+        methods: {
+            toggleEditMode(index) {
+                this.isEditMode = true;
+                this.editIndex = index;
+                this.currentMensagem = { ...this.mensagens[index] };
+            },
+            addMensagem() {
+                axios.post('/api/MensagensPredefinidasUsuario/salvar', this.currentMensagem)
+                    .then(response => {
+                        const novaMensagem = { ...this.currentMensagem, id: response.data.id }; // Garante que o ID seja armazenado
+                        this.mensagens.push(novaMensagem);
+                        $('#modalOrcamentoRenda').modal('hide');
+                        Swal.fire('Sucesso', 'Mensagem registrada com sucesso!', 'success');
+                    })
+                    .catch(error => {
+                       Swal.fire('Erro', 'Error ao registrar mensagem', 'error');
+                    });
+            },
+            updateMensagem() {
+                axios.post('/api/MensagensPredefinidasUsuario/salvar', this.currentMensagem)
+                    .then(response => {
+                        const mensagemAtualizada = { ...this.currentMensagem, id: response.data.id }; // Garante que o ID seja mantido
+                        this.$set(this.mensagens, this.editIndex, mensagemAtualizada);
+                        Swal.fire('Sucesso', 'Mensagem atualizada com sucesso!', 'success');
+                        $('#modalOrcamentoRenda').modal('hide');
+                    })
+                    .catch(error => {
+                         Swal.fire('Erro', 'Error ao atualizar mensagem!', 'error');
+                    });
+            },
+            excluirMensagem(id) {
+                Swal.fire({
+                    title: 'Tem certeza que deseja excluir esta mensagem?',
+                    text: "Você não poderá desfazer isso!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sim, excluir!',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        axios.delete(`/api/MensagensPredefinidasUsuario/excluir/${id}`)
+                        .then(response => {
+                            this.mensagens = this.mensagens.filter(m => m.id !== id);
+                            Swal.fire('Sucesso', 'Mensagem Excluida!', 'success');
+                        })
+                        .catch(error => {
+                            Swal.fire('Erro', 'Error ao excluir mensagem!', 'error');
+                        });
+                    }
+                });
+            },
+            listarMensagens() {
+                axios.get('/api/MensagensPredefinidasUsuario/listar')
+                    .then(response => {
+                        this.mensagens = response.data;
+                    })
+                    .catch(error => {
+                        Swal.fire('Erro', 'Error ao listar mensagens!', 'error');
+                    });
+            },
+            showAlert(message) {
+                alert(message);  // Substitute with a nicer alert system if desired
+            }
+        },
+        mounted() {
+            //this.listarMensagens();
+
+            const modal = document.getElementById('modalOrcamentoRenda')
+            const out_this = this;
+            modal.addEventListener('hidden.bs.modal', event => {
+                out_this.isEditMode = false;
+                out_this.currentMensagem = { titulo: '', mensagem: '' };
+            })
+        }
+    });
+</script>

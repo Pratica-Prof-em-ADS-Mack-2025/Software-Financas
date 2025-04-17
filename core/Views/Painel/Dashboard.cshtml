@@ -1,0 +1,122 @@
+﻿<style>
+    *::-webkit-scrollbar {
+        height: 10px;
+        width: 10px;
+    }
+
+    *::-webkit-scrollbar-track {
+        border-radius: 5px;
+        background-color: #F5F5F5;
+    }
+
+        *::-webkit-scrollbar-track:hover {
+            background-color: #E8E8E8;
+        }
+
+        *::-webkit-scrollbar-track:active {
+            background-color: #E8E8E8;
+        }
+
+    *::-webkit-scrollbar-thumb {
+        border-radius: 5px;
+        background-color: #C1C3C0;
+    }
+
+        *::-webkit-scrollbar-thumb:hover {
+            background-color: #B0B2AF;
+        }
+
+        *::-webkit-scrollbar-thumb:active {
+            background-color: #C1C3C0;
+        }
+</style>
+
+<div id="vue-chat-app" class="row py-3 h-100">
+    <div class="container-fluid py-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex flex-column gap-1 justify-content-between mb-3">
+                    <div id="chart"></div>
+
+                    <script>
+                        const options = {
+                          chart: {
+                            type: 'bar',
+                            height: 500,
+                            toolbar: { show: false }
+                          },
+                          series: [
+                            {
+                              name: 'Renda',
+                              data: Array(12).fill(8500)
+                            },
+                            {
+                              name: 'Investimentos',
+                              data: Array(12).fill(4200)
+                            },
+                            {
+                              name: 'Gastos',
+                              data: Array(12).fill(6200)
+                            }
+                          ],
+                          xaxis: {
+                            categories: [
+                              'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun',
+                              'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'
+                            ],
+                            labels: {
+                              style: {
+                                fontSize: '14px'
+                              }
+                            }
+                          },
+                          yaxis: {
+                            labels: {
+                              formatter: (val) => 'R$ ' + val.toLocaleString('pt-BR'),
+                              style: {
+                                fontSize: '14px'
+                              }
+                            }
+                          },
+                          tooltip: {
+                            y: {
+                              formatter: (val) => 'R$ ' + val.toLocaleString('pt-BR')
+                            }
+                          },
+                          plotOptions: {
+                            bar: {
+                              horizontal: false,
+                              columnWidth: '70%', // ← mais largo
+                              dataLabels: {
+                                position: 'top' // Mostrar valores em cima das barras
+                              }
+                            }
+                          },
+                          dataLabels: {
+                            enabled: true,
+                            formatter: (val) => 'R$ ' + val.toLocaleString('pt-BR'),
+                            offsetY: -10,
+                            style: {
+                              fontSize: '12px',
+                              colors: ['#000']
+                            }
+                          },
+                          colors: ['#28a745', '#007bff', '#dc3545'],
+                          legend: {
+                            position: 'top',
+                            fontSize: '14px'
+                          }
+                        };
+
+                        const chart = new ApexCharts(document.querySelector("#chart"), options);
+                        chart.render();
+                    </script>
+                </div>                  
+                       
+            </div>
+
+        </div>
+    </div>
+
+</div>
+

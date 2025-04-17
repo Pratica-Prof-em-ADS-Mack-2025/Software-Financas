@@ -1,0 +1,149 @@
+[
+  {
+    "ContainingType": "core.Controllers.LoginController",
+    "Method": "UpdateUsuario",
+    "RelativePath": "api/Login/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "usuarioDto",
+        "Type": "core.Domain.Entities.Usuario",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "core.Controllers.LoginController",
+    "Method": "Cadastrar",
+    "RelativePath": "api/Login/cadastrar",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "usuarioDto",
+        "Type": "core.Controllers.UsuarioDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "core.Controllers.LoginController",
+    "Method": "Login",
+    "RelativePath": "api/Login/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "loginDto",
+        "Type": "LoginDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "core.Controllers.LoginController",
+    "Method": "Logout",
+    "RelativePath": "api/Login/logout",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "OrcamentoRendaController",
+    "Method": "ListarOrcamentos",
+    "RelativePath": "api/OrcamentoRenda/{ano}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ano",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "OrcamentoRendaController",
+    "Method": "GetAnosDisponiveis",
+    "RelativePath": "api/OrcamentoRenda/AnosDisponiveis",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "OrcamentoRendaController",
+    "Method": "SalvarOuAtualizar",
+    "RelativePath": "api/OrcamentoRenda/SalvarOuAtualizar",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "OrcamentoRendaController\u002BRequestDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "core.Controllers.ParametroController",
+    "Method": "ExcluirParametro",
+    "RelativePath": "api/Parametro/excluir/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "core.Controllers.ParametroController",
+    "Method": "ObterParametro",
+    "RelativePath": "api/Parametro/obter",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "core.Controllers.ParametroController",
+    "Method": "SalvarParametro",
+    "RelativePath": "api/Parametro/salvar",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "parametroDto",
+        "Type": "core.Domain.Entities.Models.ParametroDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

@@ -1,0 +1,558 @@
+﻿<style>
+    div#mensagensTable_filter label {
+        display: block;
+    }
+
+    div#mensagensTable_length label {
+        display: grid;
+    }
+
+    input.form-control.form-control-sm {
+        width: 100% !important;
+        display: block;
+    }
+
+    table#mensagensTable {
+        margin: 30px auto;
+    }
+
+    select.custom-select.custom-select-sm.form-control.form-control-sm {
+        grid-row: 2;
+        max-width: 200px;
+    }
+
+    @@media(max-width:900px) {
+        .td_area {
+            overflow-x: auto !important;
+        }
+    }
+</style>
+
+ <div id="app-vue">
+    <div class="container-fluid py-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex flex-column gap-1 justify-content-between mb-3">
+                    <div class="d-flex justify-content-between gap-1">
+                        <h4 class="card-title">Fontes de Renda</h4>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalOrcamentoRenda"><i class="fas fa-plus"></i> Adicionar Fonte de Renda</button>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label for="ano" class="form-label">Ano:</label>
+                            <select class="form-select" id="ano" name="ano">
+                                <option value="2025" selected>2025</option>
+                                <option value="2024">2024</option>
+                                <option value="2023">2023</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-responsive rounded border">
+                    <table class="table-striped mb-0 table">
+                        <thead>
+                            <tr>
+                                <th>Renda</th>
+                                <th>Jan.</th>
+                                <th>Fev.</th>
+                                <th>Mar.</th>
+                                <th>Abr.</th>
+                                <th>Mai.</th>
+                                <th>Jun.</th>
+                                <th>Jul.</th>
+                                <th>Ago.</th>
+                                <th>Set.</th>
+                                <th>Out.</th>
+                                <th>Nov.</th>
+                                <th>Dez.</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Salário</td>
+                                <td>R$ 500</td>
+                                <td>R$ 500</td>
+                                <td>R$ 500</td>
+                                <td>R$ 500</td>
+                                <td>R$ 500</td>
+                                <td>R$ 500</td>
+                                <td>R$ 500</td>
+                                <td>R$ 500</td>
+                                <td>R$ 500</td>
+                                <td>R$ 500</td>
+                                <td>R$ 500</td>
+                                <td>R$ 500</td>
+                                <td class="text-nowrap text-end">
+                                    <button type="button" class="btn btn-warning text-white" data-toggle="tooltip" data-bs-custom-class="warning" data-placement="top" title="Editar" @@click="toggleEditMode(index)" data-bs-toggle="modal" data-bs-target="#modalOrcamentoRenda">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-danger" data-toggle="tooltip" data-bs-custom-class="danger" data-placement="top" title="Excluir" @@click="excluirMensagem(mensagem.id)">
+                                        <i class="fas fa-times-circle"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Dividendo</td>
+                                <td>R$ 500</td>
+                                <td>R$ 500</td>
+                                <td>R$ 500</td>
+                                <td>R$ 500</td>
+                                <td>R$ 500</td>
+                                <td>R$ 500</td>
+                                <td>R$ 500</td>
+                                <td>R$ 500</td>
+                                <td>R$ 500</td>
+                                <td>R$ 500</td>
+                                <td>R$ 500</td>
+                                <td>R$ 500</td>
+                                <td class="text-nowrap text-end">
+                                    <button type="button" class="btn btn-warning text-white" data-toggle="tooltip" data-bs-custom-class="warning" data-placement="top" title="Editar" @@click="toggleEditMode(index)" data-bs-toggle="modal" data-bs-target="#modalOrcamentoRenda">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-danger" data-toggle="tooltip" data-bs-custom-class="danger" data-placement="top" title="Excluir" @@click="excluirMensagem(mensagem.id)">
+                                        <i class="fas fa-times-circle"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Hora Extra</td>
+                                <td>R$ 500</td>
+                                <td>R$ 500</td>
+                                <td>R$ 500</td>
+                                <td>R$ 500</td>
+                                <td>R$ 500</td>
+                                <td>R$ 500</td>
+                                <td>R$ 500</td>
+                                <td>R$ 500</td>
+                                <td>R$ 500</td>
+                                <td>R$ 500</td>
+                                <td>R$ 500</td>
+                                <td>R$ 500</td>
+                                <td class="text-nowrap text-end">
+                                    <button type="button" class="btn btn-warning text-white" data-toggle="tooltip" data-bs-custom-class="warning" data-placement="top" title="Editar" @@click="toggleEditMode(index)" data-bs-toggle="modal" data-bs-target="#modalOrcamentoRenda">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-danger" data-toggle="tooltip" data-bs-custom-class="danger" data-placement="top" title="Excluir" @@click="excluirMensagem(mensagem.id)">
+                                        <i class="fas fa-times-circle"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" tabindex="-1" id="modalOrcamentoRenda">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">{{ isEditMode ? 'Editar Renda' : 'Adicionar Renda' }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="form_mensagem" @@submit.prevent="isEditMode ? updateMensagem() : addMensagem()">
+                        <div class="form-group col-2">
+                            <label>Ano</label>
+                            <input type="text" v-model="currentMensagem.titulo" class="form-control">
+                        </div>   
+                        <br />
+                        <div class="row text-center fw-bold mb-2">
+                            <div class="col-6 col-md">Jan.</div>
+                            <div class="col-6 col-md">Fev.</div>
+                            <div class="col-6 col-md">Mar.</div>
+                            <div class="col-6 col-md">Abr.</div>
+                            <div class="col-6 col-md">Mai.</div>
+                            <div class="col-6 col-md">Jun.</div>
+                            <div class="col-6 col-md">Jul.</div>
+                            <div class="col-6 col-md">Ago.</div>
+                            <div class="col-6 col-md">Set.</div>
+                            <div class="col-6 col-md">Out.</div>
+                            <div class="col-6 col-md">Nov.</div>
+                            <div class="col-6 col-md">Dez.</div>
+                        </div>
+
+                        <div class="row g-2">
+                            <div class="col-6 col-md">
+                                <input type="text" class="form-control" placeholder="R$ 500" name="jan">
+                            </div>
+                            <div class="col-6 col-md">
+                                <input type="text" class="form-control" placeholder="R$ 500" name="fev">
+                            </div>
+                            <div class="col-6 col-md">
+                                <input type="text" class="form-control" placeholder="R$ 500" name="mar">
+                            </div>
+                            <div class="col-6 col-md">
+                                <input type="text" class="form-control" placeholder="R$ 500" name="abr">
+                            </div>
+                            <div class="col-6 col-md">
+                                <input type="text" class="form-control" placeholder="R$ 500" name="mai">
+                            </div>
+                            <div class="col-6 col-md">
+                                <input type="text" class="form-control" placeholder="R$ 500" name="jun">
+                            </div>
+                            <div class="col-6 col-md">
+                                <input type="text" class="form-control" placeholder="R$ 500" name="jul">
+                            </div>
+                            <div class="col-6 col-md">
+                                <input type="text" class="form-control" placeholder="R$ 500" name="ago">
+                            </div>
+                            <div class="col-6 col-md">
+                                <input type="text" class="form-control" placeholder="R$ 500" name="set">
+                            </div>
+                            <div class="col-6 col-md">
+                                <input type="text" class="form-control" placeholder="R$ 500" name="out">
+                            </div>
+                            <div class="col-6 col-md">
+                                <input type="text" class="form-control" placeholder="R$ 500" name="nov">
+                            </div>
+                            <div class="col-6 col-md">
+                                <input type="text" class="form-control" placeholder="R$ 500" name="dez">
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="submit" form="form_mensagem" class="btn btn-primary">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    new Vue({
+        el: '#app-vue',
+        data: {
+            mensagens: [],
+            currentMensagem: { titulo: '', mensagem: '' },
+            isEditMode: false,
+            editIndex: -1
+        },
+        methods: {
+            toggleEditMode(index) {
+                this.isEditMode = true;
+                this.editIndex = index;
+                this.currentMensagem = { ...this.mensagens[index] };
+            },           
+            showAlert(message) {
+                alert(message);  // Substitute with a nicer alert system if desired
+            }
+        },
+        mounted() {
+            //this.listarMensagens();
+
+            const modal = document.getElementById('modalOrcamentoRenda')
+            const out_this = this;
+            modal.addEventListener('hidden.bs.modal', event => {
+                out_this.isEditMode = false;
+                out_this.currentMensagem = { titulo: '', mensagem: '' };
+            })
+        }
+    });
+</script> 
+
+@* <style>
+    div#rendaTable_filter label {
+        display: block;
+    }
+
+    div#rendaTable_length label {
+        display: grid;
+    }
+
+    input.form-control.form-control-sm {
+        width: 100% !important;
+        display: block;
+    }
+
+    table#rendaTable {
+        margin: 30px auto;
+    }
+
+    select.custom-select.custom-select-sm.form-control.form-control-sm {
+        grid-row: 2;
+        max-width: 200px;
+    }
+
+    @@media(max-width:900px) {
+        .td_area {
+            overflow-x: auto !important;
+        }
+    }
+</style>
+<div id="app-vue">
+    <div class="container-fluid py-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex flex-column gap-1 justify-content-between mb-3">
+                    <div class="d-flex justify-content-between gap-1">
+                        <h4 class="card-title">Fontes de Renda</h4>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalOrcamentoRenda">
+                            <i class="fas fa-plus"></i> Adicionar Fonte de Renda
+                        </button>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label for="ano" class="form-label">Ano:</label>
+                            <select class="form-select" id="ano" v-model="currentAno" @@change="carregarRendasPorAno">
+                                <option v-for="ano in anosDisponiveis" :key="ano" :value="ano">{{ ano }}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-responsive rounded border">
+                    <table class="table table-striped mb-0">
+                        <thead>
+                            <tr>
+                                <th>Renda</th>
+                                <th>Jan.</th>
+                                <th>Fev.</th>
+                                <th>Mar.</th>
+                                <th>Abr.</th>
+                                <th>Mai.</th>
+                                <th>Jun.</th>
+                                <th>Jul.</th>
+                                <th>Ago.</th>
+                                <th>Set.</th>
+                                <th>Out.</th>
+                                <th>Nov.</th>
+                                <th>Dez.</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(item, index) in mensagens" :key="index">
+                                <td>{{ item.nome }}</td>
+                                <td v-for="mes in Object.keys(meses)" :key="mes" class="text-end">
+                                    {{ formatarNumero(item.valores[mes]) }}
+                                </td>
+                                <td>
+                                    <button class="btn btn-warning text-white me-1" data-bs-toggle="modal" data-bs-target="#modalOrcamentoRenda" @@click="editarRenda(item)">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-danger" @@click="excluirRenda(item)">
+                                        <i class="fas fa-times-circle"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr v-if="mensagens.length === 0">
+                                <td colspan="14" class="text-center">Nenhuma renda cadastrada para este ano.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalOrcamentoRenda" tabindex="-1">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">{{ isEditMode ? 'Editar Renda' : 'Adicionar Renda' }}</h5>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="form_mensagem" @@submit.prevent="salvarOuAtualizar">
+                        <div class="row mb-3">
+                            <div class="col-md-2">
+                                <label class="form-label">Ano</label>
+                                <input type="number" class="form-control" v-model="currentAno">
+                            </div>
+                        </div>
+
+                        <div class="row text-center fw-bold mb-2">
+                            <div class="col-6 col-md" v-for="(num, mes) in meses">{{ mes }}</div>
+                        </div>
+
+                        <div class="row g-2 mb-3">
+                            <div class="col-6 col-md" v-for="(num, key) in meses">
+                                <input type="text"
+                                       class="form-control"
+                                       :placeholder="'R$ 0,00'"
+                                       v-model="valoresMes[key]"
+                                       @@input="formatarValorMonetario(key)">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="submit" form="form_mensagem" class="btn btn-primary">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    new Vue({
+        el: '#app-vue',
+        data: {
+            isEditMode: false,
+            nomeRenda: '',
+            idRendaEditando: null,
+            currentAno: new Date().getFullYear(),
+            valoresMes: {
+                jan: '', fev: '', mar: '', abr: '', mai: '', jun: '',
+                jul: '', ago: '', set: '', out: '', nov: '', dez: ''
+            },
+            meses: {
+                jan: 1, fev: 2, mar: 3, abr: 4, mai: 5, jun: 6,
+                jul: 7, ago: 8, set: 9, out: 10, nov: 11, dez: 12
+            },
+            mensagens: [],
+            anosDisponiveis: [],
+            idUsuario: 1
+        },
+        methods: {
+            montarDTOs() {
+                const lista = [];
+
+                for (let [key, mesNumero] of Object.entries(this.meses)) {
+                    let valorRaw = this.valoresMes[key] || '0';
+                    valorRaw = valorRaw.replace(/[^\d,.-]/g, '').replace(',', '.').trim();
+                    const valor = parseFloat(valorRaw) || 0;
+
+                    lista.push({
+                        id: this.idRendaEditando ?? null,
+                        idUsuario: this.idUsuario,
+                        ano: parseInt(this.currentAno),
+                        mes: mesNumero,
+                        valor: valor,
+                        nome: this.nomeRenda
+                    });
+                }
+
+                return lista;
+            },
+
+            formatarValorMonetario(key) {
+                let valor = this.valoresMes[key];
+                valor = valor.replace(/\D/g, '');
+
+                if (!valor) {
+                    this.valoresMes[key] = '';
+                    return;
+                }
+
+                valor = (parseFloat(valor) / 100).toFixed(2);
+                this.valoresMes[key] = 'R$ ' + valor.replace('.', ',');
+            },
+
+            formatarNumero(valor) {
+                if (!valor || valor === 0) return '-';
+                return 'R$ ' + valor.toFixed(2).replace('.', ',');
+            },
+
+            async salvarOuAtualizar() {
+                const listaDTO = this.montarDTOs();
+
+                const response = await fetch(`/api/OrcamentoRenda/SalvarOuAtualizar`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ dados: listaDTO })
+                });
+
+                if (response.ok) {
+                    alert('Dados salvos com sucesso!');
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('modalOrcamentoRenda'));
+                    modal.hide();
+                    this.resetarFormulario();
+                    this.carregarRendasPorAno();
+                } else {
+                    const erro = await response.text();
+                    alert('Erro ao salvar: ' + erro);
+                }
+            },
+
+            editarRenda(item) {
+                this.isEditMode = true;
+                this.nomeRenda = item.nome;
+                this.idRendaEditando = item.id;
+
+                for (let key in this.meses) {
+                    const valor = item.valores[key] || 0;
+                    this.valoresMes[key] = 'R$ ' + valor.toFixed(2).replace('.', ',');
+                }
+            },
+
+            async excluirRenda(item) {
+                if (!confirm(`Deseja excluir a fonte de renda "${item.nome}"?`)) return;
+
+                const response = await fetch(`/api/OrcamentoRenda/Excluir?id=${item.id}`, { method: 'DELETE' });
+
+                if (response.ok) {
+                    alert('Renda excluída com sucesso!');
+                    this.carregarRendasPorAno();
+                } else {
+                    const erro = await response.text();
+                    alert('Erro ao excluir: ' + erro);
+                }
+            },
+
+            resetarFormulario() {
+                this.nomeRenda = '';
+                this.idRendaEditando = null;
+                for (let key in this.valoresMes) this.valoresMes[key] = '';
+                this.isEditMode = false;
+            },
+
+            async carregarAnosDisponiveis() {
+                const response = await fetch(`/api/OrcamentoRenda/AnosDisponiveis`);
+                const anos = await response.json();
+                this.anosDisponiveis = anos;
+
+                if (anos.length > 0) {
+                    this.currentAno = anos[0];
+                    this.carregarRendasPorAno();
+                }
+            },
+
+                async carregarRendasPorAno() {
+                    const response = await fetch(`/api/OrcamentoRenda/${this.currentAno}`);
+                    const dados = await response.json();
+
+                    // Agrupa os valores por nome da renda
+                    const agrupado = {};
+                    for (const item of dados) {
+                        const nome = item.nome;
+                        const mes = Object.keys(this.meses).find(k => this.meses[k] === item.mes);
+                        if (!agrupado[nome]) {
+                            agrupado[nome] = {
+                                id: item.id,
+                                nome: nome,
+                                valores: {}
+                            };
+                        }
+                        agrupado[nome].valores[mes] = item.valor;
+                    }
+
+                    this.mensagens = Object.values(agrupado);
+                }
+
+        },
+        mounted() {
+            this.carregarAnosDisponiveis();
+            const modal = document.getElementById('modalOrcamentoRenda');
+            modal.addEventListener('hidden.bs.modal', () => this.resetarFormulario());
+        }
+    });
+</script> *@
+
+
+
+
+

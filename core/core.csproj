@@ -1,0 +1,129 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <UserSecretsId>96462b64-1a9d-40cf-aad5-b83bac0d352e</UserSecretsId>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Domain\PageModels\**" />
+    <Compile Remove="Enums\**" />
+    <Compile Remove="PlanilhasUpload\**" />
+    <Compile Remove="wwwroot\assets\js\currency\**" />
+    <Compile Remove="wwwroot\assets\normativo\**" />
+    <Compile Remove="wwwroot\css\**" />
+    <Compile Remove="wwwroot\fonts\**" />
+    <Compile Remove="wwwroot\js\**" />
+    <Compile Remove="wwwroot\libs\**" />
+    <Content Remove="Domain\PageModels\**" />
+    <Content Remove="Enums\**" />
+    <Content Remove="PlanilhasUpload\**" />
+    <Content Remove="wwwroot\assets\js\currency\**" />
+    <Content Remove="wwwroot\assets\normativo\**" />
+    <Content Remove="wwwroot\css\**" />
+    <Content Remove="wwwroot\fonts\**" />
+    <Content Remove="wwwroot\js\**" />
+    <Content Remove="wwwroot\libs\**" />
+    <EmbeddedResource Remove="Domain\PageModels\**" />
+    <EmbeddedResource Remove="Enums\**" />
+    <EmbeddedResource Remove="PlanilhasUpload\**" />
+    <EmbeddedResource Remove="wwwroot\assets\js\currency\**" />
+    <EmbeddedResource Remove="wwwroot\assets\normativo\**" />
+    <EmbeddedResource Remove="wwwroot\css\**" />
+    <EmbeddedResource Remove="wwwroot\fonts\**" />
+    <EmbeddedResource Remove="wwwroot\js\**" />
+    <EmbeddedResource Remove="wwwroot\libs\**" />
+    <None Remove="Domain\PageModels\**" />
+    <None Remove="Enums\**" />
+    <None Remove="PlanilhasUpload\**" />
+    <None Remove="wwwroot\assets\js\currency\**" />
+    <None Remove="wwwroot\assets\normativo\**" />
+    <None Remove="wwwroot\css\**" />
+    <None Remove="wwwroot\fonts\**" />
+    <None Remove="wwwroot\js\**" />
+    <None Remove="wwwroot\libs\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Service\IConversaService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\assets\js\comum.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="appsettings.Production.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <WrapperTool>tlbimp</WrapperTool>
+      <VersionMinor>9</VersionMinor>
+      <VersionMajor>1</VersionMajor>
+      <Guid>00020813-0000-0000-c000-000000000046</Guid>
+      <Lcid>0</Lcid>
+      <Isolated>false</Isolated>
+      <EmbedInteropTypes>true</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+
+  <ItemGroup>
+      <PackageReference Include="ClosedXML" Version="0.102.2" />
+    <PackageReference Include="Dapper" Version="2.1.28" />
+    <PackageReference Include="iTextSharp" Version="5.5.13.4" />
+    <PackageReference Include="LocalStorage" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="6.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.8.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+    <PackageReference Include="MySql.Data" Version="8.3.0" />
+    <PackageReference Include="PagarMeCore" Version="1.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.5.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.3.1" />
+    <PackageReference Include="System.Text.Json" Version="8.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
+    <Folder Include="wwwroot\assets\images\fotos\samaritana\" />
+    <Folder Include="wwwroot\assets\images\noticias\" />
+    <Folder Include="wwwroot\assets\sounds\" />
+    <Folder Include="wwwroot\assets\relatorio\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\assets\js\comum.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\Painel\Login.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <Target Name="FixupComReferencesBeforeResolveTagHelperRazorGenerateInputs" BeforeTargets="ResolveTagHelperRazorGenerateInputs">
+    <ItemGroup>
+      <!-- Remove all your COM references, e.g., Interop.Excel in this case -->
+      <RazorReferencePath Remove="obj\Debug\net5.0\Interop.Microsoft.Office.Interop.Excel.dll" />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="resolveInteropOutputPath" BeforeTargets="ResolveComReferences" Condition="'@(COMReference)'!='' or '@(COMFileReference)'!=''">
+    <PropertyGroup Condition=" '$(InteropOutputPath)' == '' ">
+      <InteropOutputPath>$(MSBuildProjectDirectory)\$(IntermediateOutputPath)</InteropOutputPath>
+    </PropertyGroup>
+  </Target>
+
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
+
+</Project>

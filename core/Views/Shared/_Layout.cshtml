@@ -1,0 +1,276 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <title>Self Care Container</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="~/assets/images/favicon.png">
+
+    <link href="~/assets/libs/chartist/chartist.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Css -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Icons Css -->
+    <link href="~/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="~/assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+
+    <!-- Summernote css -->
+    <link href="~/assets/libs/summernote/summernote-bs4.min.css" rel="stylesheet" type="text/css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <script src='https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js'></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
+
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+    <script> 
+        function formatMoney(n, c, d, t) {
+            c = isNaN(c = Math.abs(c)) ? 2 : c, d = d == undefined ? "," : d, t = t == undefined ? "." : t, s = n < 0 ? "-" : "", i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "", j = (j = i.length) > 3 ? j % 3 : 0;
+            return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+        }
+   
+        function formatarTresEmTres(n) {
+            n = n.toString();
+            var nFormatado = '';
+            for (var i = n.length; i > 0; i = i - 3) {
+                nFormatado += '.' + n.substring(i - 3, i);
+            };
+            return nFormatado.split(".").slice(1).reverse().join(".");
+        }
+  
+        function formatarValor(valor) {
+            console.log(valor.toLocaleString('pt-BR'));
+            return valor.toLocaleString('pt-BR');
+        }
+ 
+        function addDots(nStr) {
+            nStr += '';
+            x = nStr.split('.');
+            x1 = x[0];
+            x2 = x.length > 1 ? '.' + x[1] : '';
+            var rgx = /(\d+)(\d{3})/;
+            while (rgx.test(x1)) {
+                x1 = x1.replace(rgx, '$1' + '.' + '$2'); // changed comma to dot here
+            }
+            return x1 + x2;
+        }
+
+        function removeHours(data) {
+            if (data)
+                return data.replace(' 00:00:00', '')
+        }
+        function removeHour(data) {
+            if (data)
+                return data.replace('T00:00:00', '')
+        }
+
+        const mask_cellphone = (numero) => {
+            if (!numero) return ''
+            return numero.replace(/^(\d{2})(\d{5})(\d{4})$/, "($1) $2-$3");
+        };
+
+        function unmask(text) {
+            if(!text) return ''
+            return text.replace(/\D/g, "")
+        } 
+    </script>
+</head>
+
+<body data-sidebar="dark" style="height: 100vh; overflow: hidden;">  
+    <script src="~/assets/libs/jquery/jquery.min.js"></script> 
+
+    <!-- Begin page -->
+    <div id="layout-wrapper" class="h-100">
+        <header id="page-topbar">
+            <div class="navbar-header">
+                <div class="d-flex">
+                    <!-- LOGO -->
+                    <div class="navbar-brand-box">
+                        <a href="../Painel/Dashboard" class="logo logo-dark">
+                            <span class="logo-sm">
+                                <img src="~/assets/images/logo_small.png" alt="" height="30">
+                            </span>
+                            <span class="logo-lg">
+                                <img src="~/assets/images/selfcarelogo_icone_light.png" alt="" height="50">
+                            </span>
+                        </a>
+
+                        <a href="../Painel/Dashboard" class="logo logo-light">
+                            <span class="logo-sm">
+                                <img src="~/assets/images/logo_small.png" alt="" height="30">
+                            </span>
+                            <span class="logo-lg">
+                                <img src="~/assets/images/selfcarelogo_icone_light.png" alt="" height="50">
+                            </span>
+                        </a>
+                    </div>
+
+                    <button type="button" class="btn btn-sm px-3 font-size-24 header-item waves-effect" id="vertical-menu-btn">
+                        <i class="mdi mdi-menu"></i>
+                    </button>
+                </div>             
+
+                <div class="d-flex">
+                    <div class="dropdown d-none d-md-block ml-2">
+                        <button type="button" class="btn header-item waves-effect dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="mdi mdi-account-circle font-size-24 mr-1 align-middle"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li>
+                                <a href="#" class="dropdown-item text-danger text-center" @@click="logout">
+                                    <i class="mdi mdi-logout text-danger"></i> Sair
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </header>
+
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="vertical-menu" id="menu-lateral">
+
+            <div data-simplebar class="h-100">
+
+                <!--- Sidemenu -->
+                <div id="sidebar-menu">
+                    <!-- Left Menu Start -->
+                    <ul class="metismenu list-unstyled" id="side-menu">
+                        <li class="menu-title" id="titulo-menu">Menu</li>
+
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect" style="text-decoration: none !important;">
+                                <i class="ti-home"></i>
+                                <span>Relatórios</span>                                
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="../Painel/Renda" style="text-decoration: none !important;">Renda</a></li>
+                                <li><a href="../Painel/Gastos" style="text-decoration: none !important;">Gastos</a></li>
+                                <li><a href="../Painel/Investimentos" style="text-decoration: none !important;">Investimentos</a></li>
+                            </ul> 
+                        </li>
+
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect" style="text-decoration: none !important;">
+                                <i class="ti-home"></i>
+                                <span>Orçamento</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="../Painel/OrcamentoRenda" style="text-decoration: none !important;">Renda</a></li>
+                                <li><a href="../Painel/OrcamentoGastos" style="text-decoration: none !important;">Gastos</a></li>
+                                <li><a href="../Painel/OrcamentoInvestimentos" style="text-decoration: none !important;">Investimentos</a></li>
+                            </ul>
+                        </li>                       
+
+                        <li>
+                            <a href="../Painel/Lancamentos" class="waves-effect" style="text-decoration: none !important;">
+                                <i class="ti-archive"></i>
+                                <span> Lançamentos</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="../Painel/Parametros" class="waves-effect" style="text-decoration: none !important;">
+                                <i class="ti-bookmark-alt"></i>
+                                <span>  Parâmetros  </span>
+                            </a>
+                        </li> 
+                    </ul>
+                </div>
+                <!-- Sidebar -->
+            </div>
+        </div>
+        <!-- Left Sidebar End -->
+        <!-- ============================================================== -->
+
+        <div class="main-content h-100"> 
+            <div class="page-content h-100 pb-0 d-flex">
+                <div class="container-fluid flex-fill overflow-auto"> 
+                    @RenderBody() 
+                </div> 
+            </div> 
+        </div> 
+    </div>
+    <!-- END layout-wrapper -->
+
+    <script>
+        new Vue({
+            el: '#page-topbar',
+            data: {                
+            },
+            mounted() {
+               
+            },
+            methods: {
+                logout() {
+                    axios.post('/api/Login/logout')
+                        .then(response => {
+                            window.location.href = '/Painel/Login';
+                        })
+                        .catch(error => {
+                            console.error('Erro ao sair:', error);
+                        });
+                }
+            },
+            beforeDestroy() {
+               
+            }
+        });
+    </script>
+
+    <!-- JAVASCRIPT --> 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="~/assets/libs/bootstrap-rating/bootstrap-rating.min.js"></script>
+    <script src="~/assets/libs/metismenu/metisMenu.min.js"></script>
+    <script src="~/assets/libs/simplebar/simplebar.min.js"></script>
+    <script src="~/assets/libs/node-waves/waves.min.js"></script>
+
+    <!-- Peity chart-->
+    <script src="~/assets/libs/peity/jquery.peity.min.js"></script>
+
+    <!-- Plugin Js-->
+    <script src="~/assets/libs/chartist/chartist.min.js"></script> 
+
+    <script src="~/assets/js/app.js"></script>
+    <script src="~/assets/js/comum.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <script src='https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js'></script>
+
+
+    <!-- Summernote js -->
+    <script src="~/assets/libs/summernote/summernote-bs4.min.js"></script>
+
+    <!-- init js -->
+    <script src="~/assets/js/pages/form-editor.init.js"></script>
+
+    <!-- Required datatable js -->
+    <script src="~/assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="~/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <!-- Buttons examples -->
+    <script src="~/assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+    <script src="~/assets/libs/jszip/jszip.min.js"></script>
+    <script src="~/assets/libs/pdfmake/build/pdfmake.min.js"></script>
+    <script src="~/assets/libs/pdfmake/build/vfs_fonts.js"></script>
+    <script src="~/assets/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="~/assets/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="~/assets/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+    <!-- Responsive examples -->
+    <script src="~/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+
+    <!-- Datatable init js -->
+    <script src="~/assets/js/pages/datatables.init.js"></script>
+
+</body>
+</html>
+
+
+
+
